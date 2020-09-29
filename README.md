@@ -6,7 +6,7 @@ MoverScore ([Zhao et.al, 2019](https://arxiv.org/pdf/1909.02622.pdf)) is a monol
 The following Figure describes the way that MoverScore uses BERT and Earth Mover Distance to measure the similarity between two sentences.  
 
 <p align="center">
-<img src="./MoverScore.png">
+<img src="./assets/MoverScore.png">
 </p>
 
 # QUICK START
@@ -78,7 +78,7 @@ translation = 'they have air conditioning and new toilets.'
 plot_example(True, reference, translation)
 ```
 <p align="center">
-<img src="./plot_dist.png">
+<img src="./assets/plot_dist.png">
 </p>
 
 # Reference
