@@ -3,10 +3,8 @@ import io
 import json
 import zipfile
 from collections import Counter, defaultdict
-from functools import partial
 from itertools import chain
 from math import log
-from multiprocessing import Pool
 from pathlib import Path
 from transformers import DistilBertTokenizer
 
@@ -77,14 +75,11 @@ def process(tokenizer, arr):
     return set(arr)
 
 
-def get_idf_dict(arr, tokenizer, nthreads=4):
+def get_idf_dict(arr, tokenizer):
     idf_count = Counter()
     num_docs = len(arr)
 
-    process_with_tokenizer = partial(process, tokenizer)
-
-    with Pool(nthreads) as pool:
-        idf_count.update(chain.from_iterable(pool.map(process_with_tokenizer, arr)))
+    idf_count.update(chain.from_iterable(process(tokenizer, el) for el in arr))
 
     idf_dict = defaultdict(lambda: log((num_docs + 1) / (1)))
     idf_dict.update(
